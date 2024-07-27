@@ -42,7 +42,6 @@ tsc
 - Select "Node.js"
 - Modify "launch.json" file
 - Add "preLaunchTask": "tsc: build - tsconfig.json"
-- Add "outFiles": ["${workspaceFolder}/**/*.js"]
 - Now you can Debug TypeScript File
 - Set Breakpoints and Run Debug
 - Check Variable and Watch Expressions
