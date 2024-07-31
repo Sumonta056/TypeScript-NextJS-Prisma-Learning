@@ -1,11 +1,12 @@
 import React from "react";
 import { AddToCart } from "./AddToCart";
+import style from "./ProductCard.module.css";
 
 // Server Side Rendering
 const ProductCard = () => {
   return (
-    <div>
-      console.log("This code is running in sever console");
+    <div className={style.cardProduct}>
+      {/* console.log("This code is running in sever console"); */}
       <AddToCart />
     </div>
   );

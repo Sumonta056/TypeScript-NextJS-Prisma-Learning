@@ -1,4 +1,4 @@
-## 🌿 NextJs Fundamental's
+## 🌿 NextJs Fundamental's + [Daisy UI](https://daisyui.com/)
 
 - [NextJs](https://nextjs.org/) is a React framework that allows you to build static and server-side rendered applications.
 - Write code for the browser(Frontend) and server(Backend) with NextJs.
@@ -14,6 +14,62 @@
 - Example : `pages/about.js` will be available at `localhost:3000/about`
 - **Dynamic Routes** : `pages/posts/[id].js` will be available at `localhost:3000/posts/1` or `localhost:3000/posts/2` and so on.
 - **Nested Routes** : `pages/posts/[id]/[comment].js` will be available at `localhost:3000/posts/1/comment1` or `localhost:3000/posts/2/comment2` and so on.
+
+<hr>
+
+### 🛖 Data Fetching + Interface usecase in TypeScript
+
+```tsx
+import React from "react";
+
+// Defining the User interface
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+const UsersPage = async () => {
+  // Fetching data from an API
+  const res = await fetch("https://jsonplaceholder.typicode.com/users");
+  // Parsing the JSON data
+  const users: User[] = await res.json();
+  return (
+    <div>
+      <h1 className="text-black">Hello I am Users</h1>
+      <div className="flex flex-wrap">
+        {users.map((user) => (
+          <div key={user.id} className="border-2 border-black p-4 m-2">
+            <h1>{user.name}</h1>
+            <p>{user.email}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default UsersPage;
+```
+
+<hr>
+
+### ✅ Production Level Build
+
+- **Build the application for production** : `npm run build`
+- **Start the application in production mode** : `npm start`
+
+![alt text](./assets/image.png)
+
+- After adding caching in fetch `{ next: { revalidate: 10 } }`. It thinks this a static page
+
+![alt text](./assets/image-1.png)
+
+- After removing caching in fetch `{ cache: "no-cache" } `. It thinks this a dynamic page
+
+![alt text](./assets/image-2.png)
+
+<hr>
 
 ### ✨ Client vs Server Side Rendering & Components
 
@@ -96,21 +152,23 @@ That is because of three reasons. First of all, you can move your data fetching 
 
 The second reason would be that you can now entirely keep the large dependencies that your app depends on, on the server. So, any third-party packages that you're using can entirely remain on the server compared to when you use client-side rendering. You'd have to ship all of those packages to the client side, which increases your JavaScript bundle size sent to the client. Because of these two reasons, with server components, **your initial page load is going to be faster because all of the data fetching is happening on the server**. The client is just going to get a generated HTML, which is the result of your page and your data together. You're going to also ship less JavaScript to the client side, so React code can be downloaded faster, and your site or your page can be interactive faster.
 
-All components inside the app router are React server components by default. **All of your special files like Pages, layouts, loading and error, and also all call logs created components that are living inside the app router are going to be React server components by default**. If you need client-side components, you can bring them in with the use of the ***use client*** directive. **Client components enable you to add client-side interactivity**, as I already mentioned. The way you define them is with the use of the use client directive. You will put that use client directive up top of any module or component that you want to turn into a client component. That would create a boundary or define a boundary between server and client.
+All components inside the app router are React server components by default. **All of your special files like Pages, layouts, loading and error, and also all call logs created components that are living inside the app router are going to be React server components by default**. If you need client-side components, you can bring them in with the use of the **_use client_** directive. **Client components enable you to add client-side interactivity**, as I already mentioned. The way you define them is with the use of the use client directive. You will put that use client directive up top of any module or component that you want to turn into a client component. That would create a boundary or define a boundary between server and client.
 
 Any other module or component imported into that file is going to also become a client component. That's the reason why we cannot import a server component into a client component. **Once you have that use client directive up top, that will mark the boundary, and everything inside of it nested down, even to the children, are going to become a client component.** Therefore, you won't even need to repeat this use client further down inside the components that are imported into this client component. Once you mark this used client or the boundary once, everything else further down imported into this client component is going to be automatically a client component.
 
 Server components are guaranteed to only be rendered on the server, and from a React perspective, client components are rendered entirely or primarily on the client side. However, in Next.js, we know client components are also pre-rendered on the server. So, the HTML is going to be generated on the server, and then the result is going to be hydrated on the client side or become interactive on the client side using React.
 
-#####  When would you use which? When would you use a server component versus a client component? 
-**The rule of thumb is to use server components unless you have a specific reason to use a client component**. 
+### When would you use which? When would you use a server component versus a client component?
 
-##### ✨ What are those specific reasons? for using client components
+**The rule of thumb is to use server components unless you have a specific reason to use a client component**.
+
+### ✨ What are those specific reasons? for using client components
+
 If you wanted to **add any interactivity** and **event listeners such as on click and on change**, anything that needs to interact with the user, you would use a client component. If you want to use **React hooks** or any custom hook that depends on React hooks, **useState, useEffect, or context**, you would use a client component. Another reason would be anytime that you want to access any browser-specific APIs. For example, you want to access the window object or the intersection observer. These are only accessible in the browser, so you would need to use a client component to be able to access them. The last reason why you would want or the use case why you want to use a client component is if you want to use a React class component.
 
 In all other cases, you're going to use React server component. **If you need to fetch data, you can fetch your data or co-locate your data fetching with your server component on the server side.** Anytime you need to access any backend service or sensitive information like tokens and environment variables, you're going to use server components, especially if you want to keep your large dependencies on the server instead of sending that JavaScript bundle to the client. You're going to use or default to using React server components.
 
-Now, let's talk about a couple of common patterns when you want to compose your client components and server components together to create your application. The first one is to move your client components as further down as you can to the leaves of your component tree. **Therefore, Next.js can optimize the performance of your application by rendering as much as possible on the server.** For example, in this example that we had over here up top, as you can see, *we have this search bar, which needs to be a client component. It needs client interactivity. Instead of turning this whole navbar or the whole layout into a client component just because this search bar needs interactivity, you can abstract the interactivity logic of the search bar into its own client component and still bring that in or import it inside of your layout, which is a server component.*
+Now, let's talk about a couple of common patterns when you want to compose your client components and server components together to create your application. The first one is to move your client components as further down as you can to the leaves of your component tree. **Therefore, Next.js can optimize the performance of your application by rendering as much as possible on the server.** For example, in this example that we had over here up top, as you can see, _we have this search bar, which needs to be a client component. It needs client interactivity. Instead of turning this whole navbar or the whole layout into a client component just because this search bar needs interactivity, you can abstract the interactivity logic of the search bar into its own client component and still bring that in or import it inside of your layout, which is a server component._
 
 So, you're going to take that or bring that inside of a server component, which is going to allow Next.js to render your layout on the server and just plug in this search bar or client component to this whole server component. When composing server and client components together, behind the scene, R**eact is going to render all your server components on the server. It's going to then send the results of your server components to the client.** During this stage, if it encounters any client component, it is going to skip rendering it and it's going to create a little hole or a little slot for this client component. Once the result is sent to the client side, these client components are going to be rendered and they're going to just be filled into this slot that was coming from the server, merging the result of your server render and client render together.
 
