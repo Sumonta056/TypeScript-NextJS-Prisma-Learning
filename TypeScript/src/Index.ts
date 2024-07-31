@@ -9,6 +9,8 @@ let age: number = 20;
 // Catch Error in compile time rather than runtime like js
 // ! age = "gg"; // Error
 
+
+
 if (age > 18) {
     age += 10;
 }
@@ -20,7 +22,13 @@ let course = "TypeScript";
 let isBeginner = true;
 let level;
 
-
+/**
+ * 
+ * @param a 
+ * @param b 
+ * @returns 
+ * 
+ */
 function add(a: number, b: number): number {
     return a + b;
 }

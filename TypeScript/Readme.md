@@ -152,17 +152,22 @@ In this example, the add function takes two parameters, num1 and num2, both of w
 An interface is a way to define a contract in your code. It defines the syntax for classes to follow. In other words, an interface defines the syntax that any entity must adhere to.
 
 ```typescript
-interface Person {
-  name: string;
-  age: number;
-  location: string;
-  isProgrammer: boolean;
+interface Car {
+  brand: string;
+  model: string;
+  year: number;
+  isElectric: boolean;
 }
+
+const myCar: Car = {
+  brand: "Tesla",
+  model: "Model 3",
+  year: 2022,
+  isElectric: true,
+};
 ```
 
 In this example, we define an interface called Person. It has four properties: name, age, location, and isProgrammer. Each property has a specific type.
-
-
 
 
 
