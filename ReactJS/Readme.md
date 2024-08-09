@@ -1,1 +1,0 @@
-## Learning React with TypeScript
