@@ -17,3 +17,7 @@
 - Child - 2 : `md:col-span-3`
 
 ![alt text](./assets/image-3.png)
+
+## Responsive Navbar
+
+![alt text](./assets/image-4.png)

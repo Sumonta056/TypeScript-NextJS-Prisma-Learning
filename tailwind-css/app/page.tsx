@@ -1,6 +1,9 @@
+import Navbar from "./Navbar";
+
 export default function Home() {
   return (
     <>
+      <Navbar />
       <div className="flex flex-col items-center justify-between px-12 py-10">
         <h1 className="text-4xl font-bold text-center">
           Welcome to Tailwind CSS
