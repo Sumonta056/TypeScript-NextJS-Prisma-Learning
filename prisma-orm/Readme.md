@@ -3,6 +3,7 @@
 - [Prisma ORM - MongoDB - Typescript](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/mongodb/connect-your-database-typescript-mongodb)
 - [MongoDB Atlas Online](https://www.mongodb.com/products/platform/atlas-database)
 - [Prisma Crash Course - Traverse Media](https://www.traversymedia.com/blog/prisma-crash-course)
+- [List of Prisma Queries](https://www.prisma.io/docs/orm/prisma-client/queries)
 
 ## Getting Started :
 
@@ -111,4 +112,121 @@ main()
 
 ```bash
 npx ts-node index.ts
+```
+
+## Data Model
+
+```prisma
+model User {
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId //Primary key and auto-generated
+  email    String    @unique //Required field and unique
+  name     String? //Optional field
+  articles Article[] //Relation to Article model
+}
+
+model Article {
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId //Primary key and auto-generated
+  title    String //Required field
+  body     String? //Optional field
+  aurthor  User    @relation(fields: [authorId], references: [id]) //Relation to User model with foreign key
+  authorId String  @db.ObjectId //Foreign key
+}
+```
+
+## Query
+
+- Create a new user
+
+```typescript
+const user = await prisma.user.create({
+  data: {
+    name: "Promi Mojumder",
+    email: "promimojumder8@gmail.com",
+  },
+});
+```
+
+- Get all users
+
+```typescript
+const users = await prisma.user.findMany();
+```
+
+- Create a new article
+
+```typescript
+const article = await prisma.article.create({
+  data: {
+    title: "Hello World",
+    body: "This is a test article",
+    aurthor: {
+      connect: {
+        id: "66b8216bb7d24ca663a4fac5",
+      },
+    },
+  },
+});
+```
+
+- Find all articles
+
+```typescript
+const articles = await prisma.article.findMany();
+```
+
+- Find all articles with author
+
+```typescript
+const articles = await prisma.article.findMany({
+  include: {
+    aurthor: true,
+  },
+});
+```
+
+- Find all articles with author name
+
+```typescript
+const articles = await prisma.article.findMany({
+  include: {
+    aurthor: {
+      select: {
+        name: true,
+      },
+    },
+  },
+});
+```
+
+- Update User Details
+
+```typescript
+const user = await prisma.user.update({
+  where: {
+    id: "66b8216bb7d24ca663a4fac5",
+  },
+  data: {
+    name: "Promi Saha",
+  },
+});
+```
+
+- Delete User
+
+```typescript
+const user = await prisma.user.delete({
+  where: {
+    id: "66b8216bb7d24ca663a4fac5",
+  },
+});
+```
+
+- Sorting based on name
+
+```tsx
+const users = await prisma.user.findMany({
+  orderBy: {
+    name: "asc",
+  },
+});
 ```

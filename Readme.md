@@ -4,6 +4,7 @@
 - Learn NextJS Basic and Resources : **([🎯 Click Here](./NextJS/))**
 - Try NextJs Boiler Plate + Magic UI : **([🎯 Click Here](./nextjs-boiler-plate/))**
 - Basic Tailwind CSS concepts : **([🎯 Click Here](./tailwind-css/))**
+- Basic Prisma ORM with MongoDB : **([🎯 Click Here](./prisma-orm/))**
 
 ## 🛖 Userful Resources
 

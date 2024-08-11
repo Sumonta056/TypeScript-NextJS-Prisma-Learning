@@ -4,14 +4,11 @@ const prisma = new PrismaClient();
 
 async function main() {
   // Create a new user
-  const user = await prisma.user.create({
-    data: {
-      name: "Promi Mojumder",
-      email: "promimojumder8@gmail.com",
-    },
-  });
+  // const users = await prisma.user.findMany();
 
-  console.log("Created new user: ", user);
+  const user = await prisma.user.findMany({ orderBy: { name: "asc" } });
+
+  console.log(user);
 }
 
 main()
@@ -22,3 +19,5 @@ main()
   .finally(async () => {
     await prisma.$disconnect();
   });
+
+  
