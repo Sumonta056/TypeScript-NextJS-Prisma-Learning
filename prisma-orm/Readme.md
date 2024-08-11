@@ -1,4 +1,10 @@
-## Getting Started
+## Resources :
+
+- [Prisma ORM - MongoDB - Typescript](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/mongodb/connect-your-database-typescript-mongodb)
+- [MongoDB Atlas Online](https://www.mongodb.com/products/platform/atlas-database)
+- [Prisma Crash Course - Traverse Media](https://www.traversymedia.com/blog/prisma-crash-course)
+
+## Getting Started :
 
 - **Install Prisma CLI**
 
