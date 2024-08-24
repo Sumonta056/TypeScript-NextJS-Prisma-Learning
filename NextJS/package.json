@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@blocknote/core": "^0.15.5",
+    "@blocknote/mantine": "^0.15.5",
+    "@blocknote/react": "^0.15.5",
     "next": "14.2.5",
     "react": "^18",
     "react-dom": "^18"

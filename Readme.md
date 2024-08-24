@@ -22,3 +22,4 @@
 - Zod Validation : **([🎯 Click Here](https://zod.dev))**
 - Prisma ORM : **([🎯 Click Here](https://www.prisma.io))**
 - Resend (Sending Email) : **([🎯 Click Here](https://resend.com))**
+- Block Note (Block-Based rich text editor) : **([🎯 Click Here](https://www.blocknotejs.org/))**
